@@ -242,4 +242,12 @@ a:hover {
 .readmore-btn:hover {
   color: var(--primary-dark);
 }
+
+.line {
+  display: block;
+  margin: auto;
+  width: 6rem;
+  height: 2px;
+  background-color: var(--primary-medium);
+}
 /*# sourceMappingURL=index.css.map */

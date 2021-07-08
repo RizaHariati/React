@@ -38,6 +38,7 @@ const App = () => {
   return (
     <div className="container">
       <h1>Our Tours</h1>
+      <div className="line"></div>
       <Tours tours={tours} removeItem={removeItem} />
     </div>
   );
