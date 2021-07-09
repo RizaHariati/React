@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Review from "./Review";
 import { reviews } from "./data.js";
 
@@ -9,20 +9,20 @@ function App() {
     if (count >= reviews.length - 1) {
       return setCount(0);
     } else {
-      return setCount(count + 1);
+      return setCount((prevCount) => prevCount + 1);
     }
   };
   const decrease = () => {
     if (count === 0) {
       return setCount(reviews.length - 1);
     } else {
-      return setCount(count - 1);
+      return setCount((prevCount) => prevCount - 1);
     }
   };
 
   const randomNumber = () => {
     const newNumber = Math.floor(Math.random() * reviews.length);
-    if (newNumber == count) {
+    if (newNumber === count) {
       increase();
     } else {
       setCount(newNumber);
