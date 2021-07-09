@@ -13,7 +13,7 @@ const Question = ({ id, title, info }) => {
         <div className="ask">
           <h4 className="title">{title}</h4>
           <button className="expand-btn" onClick={showText}>
-            {show || "+"} {show && "-"}
+            {show ? "-" : "+"}
           </button>
         </div>
         <div className="answer">
