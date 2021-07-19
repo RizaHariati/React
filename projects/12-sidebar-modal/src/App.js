@@ -1,18 +1,15 @@
 import React, { useContext } from "react";
-import Modal from "./Modal";
+import Home from "./Home";
 import SideBar from "./Sidebar";
-import { AppContext } from "./context";
+import Modal from "./Modal";
+import { SiteContext } from "./context";
+
 const App = () => {
-  const { openSideBar, showModal, openModal } = useContext(AppContext);
+  const { showModal } = useContext(SiteContext);
   return (
     <div className="container">
-      <button className="bar" onClick={openSideBar}>
-        <i className="fa fa-bars"></i>
-      </button>
+      <Home />
       <SideBar />
-      <button className="btn" onClick={openModal}>
-        Show Modal
-      </button>
       {showModal && <Modal />}
     </div>
   );

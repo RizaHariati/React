@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import { AppContext } from "./context";
-
+import { SiteContext } from "./context";
 const Home = () => {
-  const { closeSideBar } = useContext(AppContext);
+  const { openModal, openSideBar } = useContext(SiteContext);
   return (
-    <div className="header">
-      <div className="logo">
-        Azri <span>Coding</span>
-      </div>
-      <button className="close-btn" onClick={closeSideBar}>
-        <i className="fa fa-times"></i>
+    <div className="home">
+      <button className="bar" onClick={openSideBar}>
+        <i className="fa fa-bars"></i>
+      </button>
+      <button className="btn" onClick={openModal}>
+        Show Modal
       </button>
     </div>
   );

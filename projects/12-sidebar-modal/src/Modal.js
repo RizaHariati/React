@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from "react";
+import { SiteContext } from "./context";
 
-import { AppContext } from "./context";
 const Modal = () => {
-  const { closeModal, refModal, showModal } = useContext(AppContext);
+  const { closeModal, showModal, refModal } = useContext(SiteContext);
   useEffect(() => {
     if (showModal) {
       refModal.current.style.opacity = "1";
     } else if (!showModal) {
       refModal.current.style.opacity = "0";
     }
-  }, [showModal, refModal]);
+  }, [refModal, showModal]);
   return (
     <div className="modal-container" ref={refModal}>
       <div className="background"></div>

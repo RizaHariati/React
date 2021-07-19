@@ -1,24 +1,30 @@
 import React, { useContext, useEffect } from "react";
-import Home from "./Home";
 import { links, social } from "./data";
-import { AppContext } from "./context";
+import { SiteContext } from "./context";
 
 const Sidebar = () => {
-  const { sideBar, refSideBar } = useContext(AppContext);
+  const { closeSideBar, showSideBar, refSideBar } = useContext(SiteContext);
   useEffect(() => {
-    if (sideBar) {
-      refSideBar.current.style.left = "0px";
+    if (showSideBar) {
+      refSideBar.current.style.transform = "translateX(0)";
     } else {
-      refSideBar.current.style.left = "-300px";
+      refSideBar.current.style.transform = "translateX(-100%)";
     }
-  }, [sideBar, refSideBar]);
+  }, [refSideBar, showSideBar]);
   return (
-    <nav className="navbar" ref={refSideBar}>
-      <Home />
+    <div className="sidebar" ref={refSideBar}>
+      <div className="header">
+        <div className="logo">
+          Azri <span>Coding</span>
+        </div>
+        <button className="close-btn" onClick={closeSideBar}>
+          <i className="fa fa-times"></i>
+        </button>
+      </div>
       <div className="links-container">
         <ul className="links">
-          {links.map((link) => {
-            const { id, url, text } = link;
+          {links.map((item) => {
+            const { id, url, text } = item;
             return (
               <li key={id}>
                 <a href={url}>{text}</a>
@@ -27,18 +33,17 @@ const Sidebar = () => {
           })}
         </ul>
       </div>
-
       <div className="icons-container">
-        {social.map((link) => {
-          const { id, icon } = link;
+        {social.map((item) => {
+          const { id, icon } = item;
           return (
-            <button key={id} className="icon-btn">
+            <button className="icon-btn" key={id}>
               <i className={"fa " + icon}></i>
             </button>
           );
         })}
       </div>
-    </nav>
+    </div>
   );
 };
 
