@@ -1,5 +1,5 @@
 import React from "react";
-import Setup from "./exercise/8-useContext/1-context-api";
+import Setup from "./exercise/12-memo-useMemo-useCallback/index";
 
 const App = () => {
   return (
