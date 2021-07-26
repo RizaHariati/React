@@ -1,47 +1,59 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 import cartItem from "./data";
-import reducer from "./reducer";
-const AppContext = React.createContext();
+import { reducer } from "./reducer";
+
+const url = "https://course-api.com/react-useReducer-cart-project";
+const CartContext = React.createContext();
 
 const initialState = {
-  loading: false,
   cart: cartItem,
-  total: 0,
-  amount: 0,
+  loading: false,
+  totalPrice: 0,
+  totalAmount: 0,
 };
-const AppProvider = ({ children }) => {
+
+const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const clearCart = () => {
-    dispatch({ type: "CLEAR_CART" });
+  const fetchData = async () => {
+    dispatch({ type: "FETCH_DATA" });
+    const resp = await fetch(url);
+    const data = await resp.json();
+    dispatch({ type: "DISPLAY_DATA", payload: data });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const clearList = () => {
+    return dispatch({ type: "CLEAR_LIST" });
   };
 
   const removeItem = (id) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
+    return dispatch({ type: "REMOVE_ITEM", payload: id });
   };
 
-  const increase = (id) => {
-    dispatch({ type: "INCREASE", payload: id });
+  const changeAmount = (change, id) => {
+    return dispatch({ type: "CHANGE_AMOUNT", payload: { change, id } });
   };
-  const decrease = (id) => {
-    dispatch({ type: "DECREASE", payload: id });
-  };
+
   useEffect(() => {
-    dispatch({ type: "GET_TOTAL" });
+    dispatch({ type: "TOTAL" });
   }, [state.cart]);
+
   return (
-    <AppContext.Provider
+    <CartContext.Provider
       value={{
         ...state,
-        clearCart,
+        clearList,
         removeItem,
-        increase,
-        decrease,
+        changeAmount,
       }}
     >
       {children}
-    </AppContext.Provider>
+    </CartContext.Provider>
   );
 };
-
-export { AppContext, AppProvider };
+export const useGlobalContext = () => {
+  return useContext(CartContext);
+};
+export { CartProvider, CartContext };

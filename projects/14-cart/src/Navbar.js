@@ -1,22 +1,17 @@
-import React, { useContext } from "react";
-import { AppContext } from "./context";
-
+import React from "react";
+import { useGlobalContext } from "./context";
 const Navbar = () => {
-  const { amount } = useContext(AppContext);
+  const { totalAmount } = useGlobalContext();
   return (
-    <>
-      <nav className="navbar">
-        <h2 className="logo">
-          Azri <span>Coding</span>
-        </h2>
-        <div className="nav-icon">
-          <div className="icon">
-            <i className="fa fa-shopping-cart"></i>
-          </div>
-          <div className="total-amount">{amount}</div>
-        </div>
-      </nav>
-    </>
+    <nav className="navbar">
+      <h2 className="logo">
+        Azri <span>Coding</span>
+      </h2>
+      <div className="nav-icon">
+        <div className="icon">Tas</div>
+        <div className="total-amount">{totalAmount}</div>
+      </div>
+    </nav>
   );
 };
 

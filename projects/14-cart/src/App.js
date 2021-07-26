@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
-import { AppContext } from "./context";
+import React from "react";
 import Navbar from "./Navbar";
 import CartContainer from "./CartContainer";
+import { useGlobalContext } from "./context";
+
 const App = () => {
-  const { loading } = useContext(AppContext);
+  const { loading } = useGlobalContext();
 
   if (loading) {
     return (
       <div className="container">
-        <h1>Loading....</h1>
+        <h1>Loading...</h1>
       </div>
     );
   } else {

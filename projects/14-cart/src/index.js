@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "./App";
 import "../node_modules/font-awesome/css/font-awesome.css";
-import { AppProvider } from "./context";
+import { CartProvider } from "./context";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
+    <CartProvider>
       <App />
-    </AppProvider>
+    </CartProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

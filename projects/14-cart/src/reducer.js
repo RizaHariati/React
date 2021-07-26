@@ -1,6 +1,9 @@
-const reducer = (state, action) => {
-  if (action.type === "CLEAR_CART") {
-    return { ...state, cart: [] };
+export const reducer = (state, action) => {
+  if (action.type === "CLEAR_LIST") {
+    return {
+      ...state,
+      cart: [],
+    };
   }
   if (action.type === "REMOVE_ITEM") {
     const newCart = state.cart.filter((item) => item.id !== action.payload);
@@ -9,58 +12,55 @@ const reducer = (state, action) => {
       cart: newCart,
     };
   }
-  if (action.type === "INCREASE") {
-    let tempCart = state.cart.map((item) => {
-      if (item.id === action.payload) {
-        return { ...item, amount: item.amount + 1 };
-      }
-      return item;
-    });
-    return { ...state, cart: tempCart };
-  }
-
-  if (action.type === "DECREASE") {
-    let tempCart = state.cart
+  if (action.type === "CHANGE_AMOUNT") {
+    const { change, id } = action.payload;
+    const newCart = state.cart
       .map((item) => {
-        if (item.id === action.payload) {
-          return { ...item, amount: item.amount - 1 };
+        if (item.id === id) {
+          if (change === "increase") {
+            return { ...item, amount: item.amount + 1 };
+          } else if (change === "decrease") {
+            return { ...item, amount: item.amount - 1 };
+          }
         }
         return item;
       })
-      .filter((item) => item.amount !== 0);
+      .filter((item) => item.amount > 0);
     return {
       ...state,
-      cart: tempCart,
+      cart: newCart,
     };
   }
 
-  if ((action.type = "GET_TOTAL")) {
-    // const newAmount = action.payload.reduce((total, item) => {
-    //   return total + item.amount;
-    // }, 0);
-    // const newPrice = action.payload.reduce((total, item) => {
-    //   return total + item.amount * item.price;
-    // }, 0);
-
-    const { newTotal, newAmount } = state.cart.reduce(
-      (total, item) => {
-        const { price, amount } = item;
-        total.newTotal += price * amount;
-        total.newAmount += amount;
+  if (action.type === "TOTAL") {
+    const { totalAmount, totalPrice } = state.cart.reduce(
+      (total, index) => {
+        const { amount, price } = index;
+        total.totalAmount += amount;
+        total.totalPrice += price * amount;
         return total;
       },
-      {
-        newTotal: 0,
-        newAmount: 0,
-      }
+      { totalAmount: 0, totalPrice: 0 }
     );
-
     return {
       ...state,
-      total: newTotal.toFixed(2),
-      amount: newAmount,
+      totalPrice: totalPrice.toFixed(2),
+      totalAmount: totalAmount,
     };
   }
-  return state;
+
+  if (action.type === "FETCH_DATA") {
+    return {
+      ...state,
+      loading: true,
+    };
+  }
+  if (action.type === "DISPLAY_DATA") {
+    return {
+      ...state,
+      cart: action.payload,
+      loading: false,
+    };
+  }
+  throw new Error("no matching action type");
 };
-export default reducer;

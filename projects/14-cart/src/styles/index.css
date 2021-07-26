@@ -5,7 +5,7 @@
   --secondary-light: #eaedfd;
   --secondary-medium: #fab253;
   --secondary-dark: #e09711;
-  --accent: #ca1d1d;
+  --accent: #d64d0d;
   --accent-hover: #ca1d1d;
   --primary-font: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
   --transition: all 0.4s ease-in;
@@ -75,6 +75,10 @@ body {
   border-radius: 3rem;
   -webkit-box-shadow: var(--box-shadow);
           box-shadow: var(--box-shadow);
+}
+
+.logo span {
+  color: var(--accent);
 }
 
 .nav-icon {
@@ -165,8 +169,8 @@ body {
 }
 
 .amount {
-  height: 1.6rem;
-  line-height: 1.6rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
 }
 
 .arrow {
@@ -231,7 +235,7 @@ body {
 }
 
 .clear-container {
-  width: 100%;
+  width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -247,8 +251,6 @@ body {
   letter-spacing: 0.1rem;
   margin: auto;
   border: 1px solid var(--accent);
-  -webkit-box-shadow: var(--box-shadow);
-          box-shadow: var(--box-shadow);
   -webkit-transition: var(--transition);
   transition: var(--transition);
 }
