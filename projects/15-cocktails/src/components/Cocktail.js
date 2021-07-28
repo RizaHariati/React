@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Cocktail = ({ id, alc, name, glass, img }) => {
+const Cocktail = ({ id, name, glass, alcohol, img }) => {
   return (
     <div className="cocktail">
       <div className="image">
@@ -10,7 +10,7 @@ const Cocktail = ({ id, alc, name, glass, img }) => {
       <div className="info">
         <h4 className="name">{name}</h4>
         <p className="glass">{glass}</p>
-        <p className="type">{alc}</p>
+        <p className="type">{alcohol}</p>
         <Link to={`/singlecocktail/${id}`} className="btn">
           Details
         </Link>

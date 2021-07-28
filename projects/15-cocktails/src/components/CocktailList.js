@@ -1,29 +1,36 @@
-import { Link } from "react-router-dom";
-import Loading from "./Loading";
+import React from "react";
 import Cocktail from "./Cocktail";
+import Loading from "./Loading";
+import Error from "../pages/Error";
 import { useGlobalContext } from "../context";
 
 const CocktailList = () => {
-  const { data_cocktails, loading, setSearchTerm } = useGlobalContext();
+  const { loading, cocktails } = useGlobalContext();
+
   if (loading) {
     return <Loading />;
   }
-  if (data_cocktails.length <= 0) {
-    return (
-      <div className="page">
-        <h2>Can't find cocktail with that keyword</h2>
-        <Link to="/" className="btn" onClick={() => setSearchTerm("a")}>
-          Go Back
-        </Link>
-      </div>
-    );
+  if (cocktails.length === 0) {
+    return <Error />;
   }
+  const newDrinks = cocktails.map((drink) => {
+    const { idDrink, strDrink, strGlass, strAlcoholic, strDrinkThumb } = drink;
+    return {
+      id: idDrink,
+      name: strDrink,
+      glass: strGlass,
+      alcohol: strAlcoholic,
+      img: strDrinkThumb,
+    };
+  });
+
   return (
     <div className="cocktail-list">
       <h2>Cocktails</h2>
       <div className="cocktails">
-        {data_cocktails.map((data) => {
-          return <Cocktail key={data.id} {...data} />;
+        {newDrinks.map((drink) => {
+          const { id } = drink;
+          return <Cocktail key={id} {...drink} />;
         })}
       </div>
     </div>

@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import React from "react";
-import { useGlobalContext } from "../context";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
-  const { setSearchTerm } = useGlobalContext();
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -11,12 +10,10 @@ const Navbar = () => {
         </Link>
         <ul>
           <li>
-            <Link to="/" onClick={() => setSearchTerm("a")}>
-              Home
-            </Link>
+            <a href="/">Home</a>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <a href="/about">About</a>
           </li>
         </ul>
       </div>

@@ -1,65 +1,70 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Loading from "../components/Loading";
 import { Link, useParams } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=`;
 const SingleCocktail = () => {
+  const [single, setSingle] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [cocktail, setCocktail] = useState(null);
   const { id } = useParams();
 
-  const fetchCocktail = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const resp = await fetch(`${url}${id}`);
       const data = await resp.json();
-      const { drinks } = data;
-      if (drinks) {
+      if (data) {
+        const { drinks } = data;
         const {
-          strAlcoholic: alc,
-          strCategory: category,
-          strGlass: glass,
           strDrinkThumb: img,
           strDrink: name,
-          strInstructions: instr,
-          strIngredient1: ingre1,
-          strIngredient2: ingre2,
-          strIngredient3: ingre3,
-          strIngredient4: ingre4,
+          strCategory: category,
+          strGlass: glass,
+          strAlcoholic: info,
+          strInstructions: instruction,
+          strIngredient1,
+          strIngredient2,
+          strIngredient3,
+          strIngredient4,
+          strIngredient5,
         } = drinks[0];
-        const ingredients = [ingre1, ingre2, ingre3, ingre4];
-        const newCocktail = {
-          alc,
+        const ingredients = [
+          strIngredient1,
+          strIngredient2,
+          strIngredient3,
+          strIngredient4,
+          strIngredient5,
+        ];
+        const singleDrink = {
+          img,
+          name,
           category,
           glass,
-          img,
+          info,
+          instruction,
           ingredients,
-          instr,
-          name,
         };
-        setCocktail(newCocktail);
+        setSingle(singleDrink);
         setLoading(false);
       } else {
-        setCocktail(null);
+        setSingle(null);
       }
     } catch (error) {
       console.log(error);
     }
   }, [id]);
   useEffect(() => {
-    fetchCocktail();
-  }, [id, fetchCocktail]);
-
+    fetchData();
+  }, [id, fetchData]);
+  if (!single) {
+    return <Loading />;
+  }
   if (loading) {
     return <Loading />;
   }
-  if (!cocktail) {
-    return <h2>No Cocktail detail to display</h2>;
-  }
-  const { alc, category, glass, img, ingredients, instr, name } = cocktail;
+  const { img, name, category, glass, info, instruction, ingredients } = single;
   return (
     <div className="page">
-      <h1>Cocktail</h1>
       <Link to="/" className="btn">
         Back Home
       </Link>
@@ -70,23 +75,24 @@ const SingleCocktail = () => {
         </div>
         <div className="info-cocktail">
           <p className="single-cocktail">
-            <span>Name : </span> {name}
-          </p>
-          <p className="single-cocktail">
             <span>Category : </span> {category}
           </p>
           <p className="single-cocktail">
-            <span>Info : </span> {alc}
+            <span>Info : </span> {info}
           </p>
           <p className="single-cocktail">
             <span>Glass : </span> {glass}
           </p>
           <p className="single-cocktail">
-            <span>Instructions : </span> {instr}
+            <span>Instructions : </span> {instruction}
           </p>
           <p className="single-cocktail">
-            <span>Ingredients : </span>{" "}
-            {ingredients.map((ingre) => ingre + ", ")}
+            <span>Ingredients : </span>
+            {ingredients.map((item) => {
+              if (item) {
+                return item + ", ";
+              }
+            })}
           </p>
         </div>
       </div>

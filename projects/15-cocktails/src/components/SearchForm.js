@@ -1,19 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useGlobalContext } from "../context";
 
 const SearchForm = () => {
-  const { setSearchTerm, refInput } = useGlobalContext();
-  const searchCocktail = () => {
-    setSearchTerm(refInput.current.value);
-  };
+  const { settingKeyword, refInput } = useGlobalContext();
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-  useEffect(() => {
+    refInput.current.value = "";
     refInput.current.focus();
-  }, [refInput]);
-
+  };
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <label htmlFor="search">Search your favorite cocktail</label>
@@ -23,7 +18,7 @@ const SearchForm = () => {
         id="search"
         className="search"
         ref={refInput}
-        onChange={searchCocktail}
+        onChange={() => settingKeyword(refInput.current.value)}
       />
     </form>
   );

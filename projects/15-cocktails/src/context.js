@@ -1,52 +1,46 @@
 import React, {
-  useState,
+  useRef,
   useContext,
   useReducer,
   useEffect,
-  useRef,
   useCallback,
 } from "react";
 import { reducer } from "./reducer";
-const AppContext = React.createContext();
-const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 
 const initialState = {
+  cocktails: [],
   loading: false,
-  data_cocktails: [],
-  single_cocktail: {},
+  keyword: "a",
 };
+const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
+const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
-  const refInput = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [searchTerm, setSearchTerm] = useState("a");
-
+  const refInput = useRef(null);
   const fetchData = useCallback(async () => {
     dispatch({ type: "LOADING" });
     try {
-      const resp = await fetch(`${url}${searchTerm}`);
+      const resp = await fetch(`${url}+${state.keyword}`);
       const data = await resp.json();
-      const { drinks } = data;
-      if (drinks) {
-        dispatch({ type: "DISPLAY_DATA", payload: drinks });
-      } else {
-        dispatch({ type: "NULL_DATA" });
-        refInput.current.value = "";
-        refInput.current.focus();
-      }
+      dispatch({ type: "FETCH_DATA", payload: data });
     } catch (error) {
       console.log(error);
     }
-  }, [searchTerm]);
+  }, [state.keyword]);
 
   useEffect(() => {
     fetchData();
-  }, [searchTerm, fetchData]);
+  }, [state.keyword, fetchData]);
+
+  const settingKeyword = (key) => {
+    dispatch({ type: "SET_KEYWORD", payload: key });
+  };
 
   return (
     <AppContext.Provider
       value={{
         ...state,
-        setSearchTerm,
+        settingKeyword,
         refInput,
       }}
     >
