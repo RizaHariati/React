@@ -1,0 +1,186 @@
+:root {
+  --primary-dark: #34312d;
+  --primary-light: #f3f3f4;
+  --primary-medium: #cb997e;
+  --secondary-light: white;
+  --secondary-medium: #7e7f83;
+  --primary-font: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+  --transition: all 0.3s ease-in;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.295);
+  --radius: 0.5rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-transform: capitalize;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  color: var(--primary-dark);
+  font-family: var(--primary-font);
+  background-color: var(--primary-light);
+}
+
+.container {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.line {
+  display: block;
+  height: 3px;
+  width: 100px;
+  background-color: var(--primary-medium);
+  margin: 0.5rem auto;
+}
+
+.followers-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.followers {
+  width: 100%;
+  min-height: 60vh;
+  text-align: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.follower {
+  width: 220px;
+  margin: auto;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: var(--box-shadow);
+          box-shadow: var(--box-shadow);
+  background-color: var(--secondary-light);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.btn {
+  cursor: pointer;
+  text-transform: capitalize;
+  display: block;
+  margin: 1rem auto;
+  background-color: var(--primary-medium);
+  color: var(--secondary-light);
+  border: 2px solid transparent;
+  font-size: 1rem;
+  padding: 0.2rem 1.2rem;
+  border-radius: 1.2rem;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  -webkit-box-shadow: transparent;
+          box-shadow: transparent;
+  text-decoration: none;
+}
+
+.btn:hover {
+  border: 2px solid var(--primary-medium);
+  background-color: transparent;
+  color: var(--primary-medium);
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--secondary-medium);
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 0.5rem;
+}
+
+.change-btn {
+  font-family: var(--primary-font);
+  background-color: transparent;
+  border: transparent;
+  color: var(--secondary-medium);
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+}
+
+.change-btn:hover {
+  color: var(--primary-dark);
+}
+
+.number-btn {
+  font-size: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  background-color: var(--secondary-medium);
+  color: var(--primary-light);
+}
+
+.number-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+@media screen and (min-width: 800px) {
+  .followers {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+/*# sourceMappingURL=index.css.map */
