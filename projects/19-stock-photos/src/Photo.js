@@ -1,6 +1,6 @@
 import React from "react";
 const Photo = (item) => {
-  const { id, likes, urls } = item;
+  const { likes, urls } = item;
   const { profile_image, social, first_name: name } = item.user;
   const { regular: image } = urls;
   const { small: profile } = profile_image;
