@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/styles/index.css" />
+  </head>
+  <body>
+    <div class="setup">
+      <h2>Setup Quiz</h2>
+      <form class="form">
+        <div class="form-control">
+          <label for="number">Number Of Questions</label>
+          <input
+            type="number"
+            name="number"
+            id="number"
+            min="1"
+            class="input number"
+            placeholder="3"
+          />
+        </div>
+        <div class="form-control">
+          <label for="category">Number Of Questions</label>
+          <select name="category" id="category" class="category">
+            <option value="sports">sports</option>
+            <option class="share" value="history">history</option>
+            <option value="politics">politics</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="difficulty">Number Of Questions</label>
+          <select name="difficulty" id="difficulty" class="difficulty">
+            <option value="easy">easy</option>
+            <option value="medium">medium</option>
+            <option value="hard">hard</option>
+          </select>
+        </div>
+      </form>
+      <button class="btn start-btn">Start</button>
+    </div>
+    <div class="quiz">
+      <div class="modal-container">
+        <div class="modal">
+          <h2>Congrats!</h2>
+          <h4>You answered 0% of question correctly</h4>
+          <button class="btn">Play Again</button>
+        </div>
+      </div>
+      <div class="setup">
+        <div class="correct-answer">Correct Answers: 0/0</div>
+        <div class="questions-container">
+          <h3>
+            How many soccer player should be on the field at the same time
+          </h3>
+          <div class="answers-btn">
+            <button class="btn choice-btn">20</button>
+            <button class="btn choice-btn">24</button>
+            <button class="btn choice-btn">26</button>
+            <button class="btn choice-btn">22</button>
+          </div>
+        </div>
+        <button class="next-btn btn">Next Question</button>
+      </div>
+    </div>
+  </body>
+</html>
