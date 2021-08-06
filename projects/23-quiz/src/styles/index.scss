@@ -114,8 +114,7 @@ select {
   grid-gap: 3rem;
 }
 .quiz-setup {
-  width: 100%;
-  max-width: 550px;
+  width: 550px;
   height: 450px;
   padding: 3rem;
   display: flex;
@@ -133,7 +132,7 @@ select {
   justify-content: center;
 }
 .choice-btn {
-  width: 70%;
+  width: 100%;
   min-width: 150px;
   margin-top: 1rem;
   font-size: 0.8rem;
@@ -165,6 +164,7 @@ select {
   align-items: center;
   justify-content: center;
   grid-gap: 3rem;
+  transition: var(--transition);
 }
 .modal {
   width: 90%;
@@ -178,4 +178,5 @@ select {
   background-color: var(--secondary-light);
   box-shadow: var(--box-shadow);
   border-radius: var(--radius);
+  transition: var(--transition);
 }

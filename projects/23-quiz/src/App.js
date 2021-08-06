@@ -5,17 +5,18 @@ import Loading from "./Loading";
 import { useGlobalContext } from "./context";
 
 const App = () => {
-  const { modal, loading, waiting, questions, index, nextQuestion } =
+  const { loading, terms, questions, modal, index, handleNext, checkAnswer } =
     useGlobalContext();
 
   if (loading) {
     return <Loading />;
   }
-  if (waiting) {
+  if (!loading && terms) {
     return <SetupForm />;
   }
-  const nbPage = questions.length;
+
   const { question, correct_answer, incorrect_answers } = questions[index];
+  const length = questions.length;
   let answers = [...incorrect_answers];
   const newIndex = Math.floor(Math.random() * 4);
   if (newIndex === 3) {
@@ -24,24 +25,30 @@ const App = () => {
     answers.push(answers[newIndex]);
     answers[newIndex] = correct_answer;
   }
+
   return (
     <div className="quiz">
       {modal && <Modal />}
       <div className="quiz-setup">
-        <div className="correct-answer">Correct Answers: 0/{nbPage}</div>
+        <div className="correct-answer">{`${index + 1}/${length}`}</div>
         <div className="questions-container">
           <h4 style={{ textAlign: "center" }}>{question}</h4>
           <div className="answers-btn">
             {answers.map((answer, id) => {
               return (
-                <button key={id} className="btn choice-btn">
+                <button
+                  key={id}
+                  className="btn choice-btn"
+                  value={answer}
+                  onClick={checkAnswer}
+                >
                   {answer}
                 </button>
               );
             })}
           </div>
         </div>
-        <button className="next-btn btn" onClick={nextQuestion}>
+        <button className="next-btn btn" onClick={handleNext}>
           Next Question
         </button>
       </div>
