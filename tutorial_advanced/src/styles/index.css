@@ -25,7 +25,16 @@ body {
   background-color: var(--primary-light);
   margin: 50px auto;
 }
-
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid brown;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
 .container {
   width: 100%;
   height: 100%;
@@ -34,14 +43,14 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .btn {
@@ -57,7 +66,8 @@ body {
   -webkit-transition: var(--transition);
   transition: var(--transition);
   -webkit-box-shadow: transparent;
-          box-shadow: transparent;
+  box-shadow: transparent;
+  border-radius: 5px;
 }
 
 .btn:hover {
@@ -71,18 +81,18 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin: auto;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   background-color: var(--secondary-light);
   width: 80vw;
   max-width: 600px;
   border-radius: var(--radius);
   -webkit-box-shadow: var(--box-shadow);
-          box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
   margin-top: 1rem;
   padding: 1rem 2rem;
   -webkit-transition: var(--transition);
@@ -109,21 +119,21 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   line-height: 1rem;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   background-color: var(--secondary-light);
-  width: 80%;
+  width: 100%;
   max-width: 600px;
   border-radius: var(--radius);
   -webkit-box-shadow: var(--box-shadow);
-          box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
   margin: 2rem auto;
   padding: 1rem;
   -webkit-transition: var(--transition);
@@ -139,12 +149,12 @@ body {
 
 .row.col-2 {
   -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .row.col-3 {
   -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .image {
@@ -158,9 +168,9 @@ body {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
 }
 
 .card {
@@ -169,15 +179,15 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin: auto;
   background-color: var(--secondary-light);
   border-radius: var(--radius);
@@ -208,16 +218,16 @@ article {
   background-color: var(--secondary-light);
   border-radius: var(--radius);
   -webkit-box-shadow: var(--box-shadow);
-          box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .form-control {
@@ -225,11 +235,11 @@ article {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 label {
@@ -246,13 +256,13 @@ input {
   border: none;
   padding: 0.2rem;
   -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.288);
-          box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.288);
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.288);
 }
 
 input:focus {
   border: 1px solid #7e7f83;
   -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.336);
-          box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.336);
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.336);
 }
 
 .remove-btn {
@@ -276,11 +286,11 @@ ul {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 ul li {

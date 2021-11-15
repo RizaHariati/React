@@ -1,81 +1,78 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback, memo } from "react";
+import useFetch from "../9-custom-hooks/2-useFetch";
+const url = "https://course-api.com/javascript-store-products";
 
-const calcHighestPrice = (data) => {
-  return data.reduce((total, item) => {
-    const price = item.fields.price / 100;
-    if (price >= total) {
-      total = price;
-    }
-    return total;
-  }, 0);
+const mostExpensive = (data) => {
+  return (
+    data.reduce((total, item) => {
+      const price = item.fields.price;
+      if (price > total) {
+        total = price;
+      }
+      return total;
+    }, 0) / 100
+  );
 };
+
 const Index = () => {
-  const url = "https://course-api.com/javascript-store-products";
-  const [data, setdata] = useState([]);
+  const { products } = useFetch(url);
   const [count, setCount] = useState(0);
   const [cart, setCart] = useState(0);
+
+  const memoExpensive = useMemo(() => {
+    return mostExpensive(products);
+  }, [products]);
 
   const addToCart = useCallback(() => {
     setCart(cart + 1);
   }, [cart]);
-  const expensive = useMemo(() => calcHighestPrice(data), [data]);
-  const fetchData = async (url) => {
-    const resp = await fetch(url);
-    const data = await resp.json();
-    if (data) {
-      setdata(data);
-    }
-  };
-  useEffect(() => {
-    fetchData(url);
-  }, [url]);
 
   return (
-    <div>
-      <div className="modal">
-        <h1>Count : {count} </h1>
+    <div className="modal ">
+      <div className="header flex">
+        <h1>count : {count}</h1>
+        <h1>cart : {cart}</h1>
+        <h3>most expensive collection : ${memoExpensive} </h3>
         <button className="btn" onClick={() => setCount(count + 1)}>
-          Click Me
+          count
         </button>
-        <h2>Cart : {cart}</h2>
-        <h4>Highest Price : ${expensive}</h4>
       </div>
-
-      <BigList data={data} addToCart={addToCart} />
+      <BigData products={products} addToCart={addToCart} />
     </div>
   );
 };
 
 export default Index;
 
-const BigList = React.memo(({ data, addToCart }) => {
+const BigData = memo(({ products, addToCart }) => {
+  useEffect(() => {
+    console.log("this is the big data");
+  });
   return (
     <div>
-      {data.map((item) => {
-        const { id, fields } = item;
-        return <Single key={id} fields={fields} addToCart={addToCart} />;
+      {products.map((product) => {
+        return (
+          <SingleProduct key={product.id} {...product} addToCart={addToCart} />
+        );
       })}
     </div>
   );
 });
 
-export const Single = ({ fields, addToCart }) => {
-  const { colors, company, image, name, price } = fields;
-  const colorCode = colors[0];
-
+const SingleProduct = ({ fields, addToCart }) => {
+  const { image, name, company } = fields;
+  useEffect(() => {
+    console.count("single data ");
+  });
   return (
-    <div
-      className="modal"
-      style={{ backgroundColor: colorCode, color: "white" }}
-    >
-      <div className="image">
-        <img src={image[0].url} alt={company} />
-      </div>
-      <div className="info">
-        <h4 className="name">{name}</h4>
-        <p className="price">Price : $ {price / 100}</p>
-        <button onClick={addToCart}>Add to Cart</button>
-      </div>
+    <div className="flex">
+      <h3>
+        {name} <span>by {company}</span>{" "}
+      </h3>
+      <img src={image[0].url} alt={company} className="image" />
+      <button className="btn" onClick={addToCart}>
+        add to cart
+      </button>
     </div>
   );
 };
